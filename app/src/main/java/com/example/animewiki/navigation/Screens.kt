@@ -5,16 +5,16 @@ import kotlinx.serialization.Serializable
 @Serializable
 sealed class Screens {
     @Serializable
-    data object Splash : Screens()
+    object Splash : Screens()
 
     @Serializable
-    data object Home : Screens()
+    object Home : Screens()
 
     @Serializable
-    data object Welcome : Screens()
+    object Welcome : Screens()
 
     @Serializable
-    data object Search : Screens()
+    object Search : Screens()
 
     @Serializable
     data class Details(val heroId: Int) : Screens()

@@ -5,7 +5,7 @@ import androidx.navigation.compose.composable
 import com.example.animewiki.navigation.Screens
 
 fun NavGraphBuilder.welcomeComposable() {
-    composable<Screens.Welcome> {
+    composable<Screens.Welcome> { navBackStackEntry ->
 
     }
 }

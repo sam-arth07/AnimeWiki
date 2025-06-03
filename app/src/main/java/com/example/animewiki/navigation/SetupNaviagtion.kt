@@ -15,11 +15,11 @@ fun SetupNavigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screens.Splash
+        startDestination = Screens.Home
     ) {
+        homeComposable()
         splashComposable()
         welcomeComposable()
-        homeComposable()
         searchComposable()
         detailsComposable()
     }

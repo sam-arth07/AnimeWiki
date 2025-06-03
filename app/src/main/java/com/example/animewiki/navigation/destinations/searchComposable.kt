@@ -5,5 +5,7 @@ import androidx.navigation.compose.composable
 import com.example.animewiki.navigation.Screens
 
 fun NavGraphBuilder.searchComposable() {
-    composable<Screens.Search> {  }
+    composable<Screens.Search> { navBackStackEntry ->
+
+    }
 }

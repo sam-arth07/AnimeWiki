@@ -5,7 +5,7 @@ import androidx.navigation.compose.composable
 import com.example.animewiki.navigation.Screens
 
 fun NavGraphBuilder.splashComposable() {
-    composable<Screens.Splash> {
+    composable<Screens.Splash> { navBackStackEntry ->
         
     }
 }

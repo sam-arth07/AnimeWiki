@@ -8,7 +8,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.animewiki.navigation.SetupNavigation
 import com.example.animewiki.ui.theme.AnimeWikiTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var navController: NavHostController
     override fun onCreate(savedInstanceState: Bundle?) {
