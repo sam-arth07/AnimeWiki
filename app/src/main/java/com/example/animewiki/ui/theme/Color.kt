@@ -44,3 +44,11 @@ val ColorScheme.titleColor: Color
 val ColorScheme.descriptionColor: Color
     @Composable
     get() = if (isSystemInDarkTheme()) LightGray.copy(alpha = 0.5f) else DarkGray.copy(alpha = 0.5f)
+
+val ColorScheme.topAppBarContentColor
+    @Composable
+    get() = if (isSystemInDarkTheme()) LightGray else Color.White
+
+val ColorScheme.topAppBarBackgroundColor: Color
+    @Composable
+    get() = if (isSystemInDarkTheme()) Color.Black else Purple500

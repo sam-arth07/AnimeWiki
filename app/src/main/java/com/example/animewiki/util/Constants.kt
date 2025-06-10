@@ -8,4 +8,6 @@ object Constants {
     const val LAST_BOARDING_PAGE = 2
     const val COMPLETED_PREFERENCE_KEY = "completed_onboarding"
     const val PREFERENCES_NAME = "anime_preferences"
+
+    const val BASE_URL = "http://10.0.2.2:8080"
 }

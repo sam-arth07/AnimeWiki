@@ -3,12 +3,14 @@ package com.example.animewiki.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.animewiki.util.Constants.HERO_TABLE
+import kotlinx.serialization.Serializable
 
 /*
 * This Hero class will actually represent table in our database.
 * Entity in room corresponds to Table in SQL lite DB
 * */
 
+@Serializable
 @Entity(tableName = HERO_TABLE)
 data class Hero(
     @PrimaryKey(autoGenerate = false)
