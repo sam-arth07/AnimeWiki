@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.20"
 }
 
@@ -79,6 +80,7 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.paging)
 
     //Retrofit
     implementation(libs.retrofit)
@@ -87,6 +89,7 @@ dependencies {
 
     //Paging 3
     implementation(libs.androidx.paging.compose)
+
 
     //Kotlinx Serialization
     implementation(libs.kotlinx.serialization.json)

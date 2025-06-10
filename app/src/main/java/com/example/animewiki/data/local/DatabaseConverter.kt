@@ -11,19 +11,27 @@ class DatabaseConverter {
         /* *
         * Function to convert a List<String> to a simple String
         * */
-        var s = list.elementAt(0)
-
-        list.slice(1..list.lastIndex).forEach { string ->
-            s = "$s$separator$string"
+        if (list.isEmpty()) {
+            return ""
         }
-        return s
+//        var s = list.elementAt(0)
+//
+//        list.slice(1..list.lastIndex).forEach { string ->
+//            s = "$s$separator$string"
+//        }
+        return list.joinToString(separator = separator)
     }
 
+    @TypeConverter
     fun convertStringToList(str: String): List<String> {
         /* *
         * Function to convert back the stored string back to a List<String>
         * */
-        val list = str.split(delimiters = arrayOf(separator))
+
+        if (str.isEmpty()) {
+            return emptyList()
+        }
+        val list = str.split(separator)
         return list
     }
 

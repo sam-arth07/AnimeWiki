@@ -12,6 +12,6 @@ import com.example.animewiki.domain.model.HeroRemoteKey
 @TypeConverters(DatabaseConverter::class)
 abstract class AnimeDatabase : RoomDatabase() {
 
-    abstract fun provideHeroDao(): HeroDao
-    abstract fun provideHeroRemoteKeyDao(): HeroRemoteKeyDao
+    abstract fun heroDao(): HeroDao
+    abstract fun heroRemoteKeyDao(): HeroRemoteKeyDao
 }

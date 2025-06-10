@@ -1,4 +1,4 @@
-package com.example.animewiki.ui.screens.home
+package com.example.animewiki.presentation.screens.home
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +16,9 @@ import androidx.compose.ui.text.style.TextAlign
 @Composable
 fun HomeScreen() {
     Scaffold(
+        topBar = {
+
+        },
         content = { paddingValues ->
             Column(
                 modifier = Modifier
