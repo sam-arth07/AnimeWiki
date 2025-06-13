@@ -1,6 +1,9 @@
 package com.example.animewiki.di
 
+import com.example.animewiki.data.local.AnimeDatabase
 import com.example.animewiki.data.remote.AnimeApi
+import com.example.animewiki.data.repository.RemoteDataSourceImpl
+import com.example.animewiki.domain.repository.RemoteDataSource
 import com.example.animewiki.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -30,16 +33,22 @@ object NetworkModule {
     @Singleton
     fun provideRetrofitInstance(okHttpClient: OkHttpClient): Retrofit {
         val contentType = "application/json".toMediaType()
-        return Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .client(okHttpClient)
-            .addConverterFactory(Json.asConverterFactory(contentType = contentType))
-            .build()
+        return Retrofit.Builder().baseUrl(BASE_URL).client(okHttpClient)
+            .addConverterFactory(Json.asConverterFactory(contentType = contentType)).build()
     }
 
     @Provides
     @Singleton
     fun provideAnimeApi(retrofit: Retrofit): AnimeApi {
         return retrofit.create(AnimeApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        animeApi: AnimeApi,
+        animeDatabase: AnimeDatabase
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(animeApi, animeDatabase)
     }
 }
