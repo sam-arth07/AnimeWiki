@@ -19,6 +19,8 @@ val Purple500 = Color(0xFF6200EE)
 
 val LightGray = Color(0xFFD8D8D8)
 val DarkGray = Color(0xFF2A2A2A)
+val StarColor = Color(0xFFFFC94D)
+
 
 val DarkBrush = Brush.verticalGradient(
     listOf(

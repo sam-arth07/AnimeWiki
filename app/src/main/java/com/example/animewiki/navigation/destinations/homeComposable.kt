@@ -10,6 +10,8 @@ fun NavGraphBuilder.homeComposable(
     navController: NavHostController
 ) {
     composable<Screens.Home> { navBackStackEntry ->
-        HomeScreen()
+        HomeScreen(
+            navController = navController
+        )
     }
 }

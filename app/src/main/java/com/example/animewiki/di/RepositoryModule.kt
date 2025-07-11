@@ -5,6 +5,7 @@ import com.example.animewiki.data.repository.DataStoreOperationsImpl
 import com.example.animewiki.data.repository.Repository
 import com.example.animewiki.domain.repository.DataStoreOperations
 import com.example.animewiki.domain.use_cases.UseCases
+import com.example.animewiki.domain.use_cases.get_all_heroes.GetAllHeroesUseCase
 import com.example.animewiki.domain.use_cases.read_onboarding.ReadOnBoardingUseCase
 import com.example.animewiki.domain.use_cases.save_onboarding.SaveOnBoardingUseCase
 import dagger.Module
@@ -31,7 +32,8 @@ object RepositoryModule {
     fun provideUseCases(repository: Repository): UseCases {
         return UseCases(
             saveOnBoardingUseCase = SaveOnBoardingUseCase(repository = repository),
-            readOnBoardingUseCase = ReadOnBoardingUseCase(repository = repository)
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository = repository),
+            getAllHeroesUseCase = GetAllHeroesUseCase(repository = repository)
         )
     }
 }

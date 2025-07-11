@@ -1,47 +1,35 @@
 package com.example.animewiki.presentation.screens.home
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
-import com.example.animewiki.ui.theme.DarkGray
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.animewiki.presentation.common.ListContent
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun HomeScreen() {
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+fun HomeScreen(
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    navController: NavHostController,
+) {
+
+    val heroes = homeViewModel.getAllHeroes.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
             HomeTopBar(onSearchClicked = {})
         },
         content = { paddingValues ->
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(top = paddingValues.calculateTopPadding())
-                    .background(
-                        brush = Brush.linearGradient(
-                            listOf(
-                                Color.Black, DarkGray.copy(0.6f)
-                            )
-                        )
-                    ),
-                verticalArrangement = Arrangement.Center,
-            ) {
-                Text(
-                    text = "Hello Welcome to App.",
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center,
-                )
-            }
+            ListContent(
+                modifier = Modifier.padding(
+                    top = paddingValues.calculateTopPadding(),
+                    bottom = paddingValues.calculateBottomPadding()
+                ),
+                navController = navController,
+                heroes = heroes
+            )
         })
 }
