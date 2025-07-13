@@ -11,12 +11,14 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
@@ -40,7 +42,14 @@ import com.example.animewiki.util.STAR_PLACEHOLDER_HEIGHT
 
 @Composable
 fun ShimmerEffect() {
-
+    LazyColumn(
+        contentPadding = PaddingValues(all = SMALL_PADDING),
+        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+    ) {
+        items(3) {
+            AnimatedShimmerItem()
+        }
+    }
 }
 
 @Composable
@@ -65,7 +74,7 @@ fun ShimmerItem(alpha:Float) {
         color = if (isSystemInDarkTheme()) Color.Black else ShimmerLightGray,
         shape = RoundedCornerShape(size = LARGE_PADDING)
     ) {
-        Column(modifier = Modifier.fillMaxWidth().padding(MEDIUM_PADDING), verticalArrangement = Arrangement.Bottom) {
+        Column(modifier = Modifier.padding(MEDIUM_PADDING), verticalArrangement = Arrangement.Bottom) {
             Surface(
                 modifier = Modifier.alpha(alpha = alpha).fillMaxWidth(0.5f).height(NAME_PLACEHOLDER_HEIGHT),
                 color = if (isSystemInDarkTheme()) ShimmerDarkGray else ShimmerMediumGray,

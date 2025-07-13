@@ -31,12 +31,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import coil3.compose.rememberAsyncImagePainter
 import com.example.animewiki.R
 import com.example.animewiki.domain.model.Hero
 import com.example.animewiki.navigation.Screens
 import com.example.animewiki.presentation.components.RatingWidget
+import com.example.animewiki.presentation.components.ShimmerEffect
 import com.example.animewiki.ui.theme.topAppBarContentColor
 import com.example.animewiki.util.Constants.BASE_URL
 import com.example.animewiki.util.HERO_ITEM_HEIGHT
@@ -50,17 +52,51 @@ fun ListContent(
     heroes: LazyPagingItems<Hero>,
     modifier: Modifier,
 ) {
-    LazyColumn(
-        modifier = modifier,
-        contentPadding = PaddingValues(all = SMALL_PADDING),
-        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
-    ) {
-        items(heroes.itemCount, key = { it }) { index ->
-            val hero = heroes[index]
-            hero?.let {
-                HeroItem(
-                    navController = navController, hero = it
-                )
+    val result = handlePagingResult(heroes)
+    if(result){
+        LazyColumn(
+            modifier = modifier,
+            contentPadding = PaddingValues(all = SMALL_PADDING),
+            verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+        ) {
+            items(heroes.itemCount, key = { it }) { index ->
+                val hero = heroes[index]
+                hero?.let {
+                    HeroItem(
+                        navController = navController, hero = it
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun handlePagingResult(
+    heroes: LazyPagingItems<Hero>
+) : Boolean {
+    /**
+     * Returns false if data is loading and true if data is ready to be displayed to the users.
+     */
+
+    heroes.apply {
+        val error = when {
+            loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
+            loadState.prepend is LoadState.Error -> loadState.prepend as LoadState.Error
+            loadState.append is LoadState.Error -> loadState.append as LoadState.Error
+            else -> null
+        }
+        return when {
+            loadState.refresh is LoadState.Loading -> {
+                ShimmerEffect()
+                false
+            }
+            error!=null -> {
+                EmptyScreen(error)
+                false
+            }
+            else -> {
+                true
             }
         }
     }

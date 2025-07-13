@@ -1,5 +1,6 @@
 package com.example.animewiki.data.paging_source
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -10,8 +11,14 @@ import com.example.animewiki.data.remote.AnimeApi
 import com.example.animewiki.domain.model.Hero
 import com.example.animewiki.domain.model.HeroRemoteKeys
 import jakarta.inject.Inject
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-//Remote Mediator will fetch data from AnimeApi & store directly into th AnimeDatabase.
+/**
+ * Remote Mediator will fetch data from AnimeApi & store directly into the AnimeDatabase.
+ */
 
 @OptIn(ExperimentalPagingApi::class)
 class HeroRemoteMediator @Inject constructor(
@@ -20,6 +27,18 @@ class HeroRemoteMediator @Inject constructor(
 
     private val heroDao = animeDatabase.heroDao()
     private val heroRemoteKeysDao = animeDatabase.heroRemoteKeysDao()
+
+    override suspend fun initialize(): InitializeAction {
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = heroRemoteKeysDao.getRemoteKeys(heroId = 1)?.lastUpdated ?: 0
+        val cacheTimeout = 5
+        val diffInMinutes = (currentTime - lastUpdated) / 1000 / 60
+        return if (diffInMinutes.toInt() < cacheTimeout) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+    }
 
     override suspend fun load(
         loadType: LoadType, state: PagingState<Int, Hero>
@@ -70,7 +89,10 @@ class HeroRemoteMediator @Inject constructor(
                     val nextPage = response.nextPage
                     val keys = response.heroes.map { hero ->
                         HeroRemoteKeys(
-                            id = hero.id, nextPage = nextPage, prevPage = prevPage
+                            id = hero.id,
+                            nextPage = nextPage,
+                            prevPage = prevPage,
+                            lastUpdated = response.lastUpdated
                         )
                     }
                     //Add the updated keys and hero data to our tables
@@ -110,4 +132,10 @@ class HeroRemoteMediator @Inject constructor(
         }
     }
 
+
+//    private fun parseMillis(millis: Long): String {
+//        val date = Date(millis)
+//        val format = SimpleDateFormat("HH:mm", Locale.ROOT)
+//        return format.format(date)
+//    }
 }
