@@ -28,10 +28,17 @@ class HeroRemoteMediator @Inject constructor(
     private val heroDao = animeDatabase.heroDao()
     private val heroRemoteKeysDao = animeDatabase.heroRemoteKeysDao()
 
+    /**
+    * Initialize function is called before any loading is performed. It is used to check if the cached data is expired
+    * and decide whether to trigger refresh.
+    * @return InitializeAction.LAUNCH_INITIAL_REFRESH //When local data needs to be fully refreshed.
+     *
+     * InitializeAction.SKIP_INITIAL_REFRESH // When local data does not need to be refreshed.
+    */
     override suspend fun initialize(): InitializeAction {
         val currentTime = System.currentTimeMillis()
         val lastUpdated = heroRemoteKeysDao.getRemoteKeys(heroId = 1)?.lastUpdated ?: 0
-        val cacheTimeout = 5
+        val cacheTimeout = 1440 // Cache Data for 1day = 24hrs = 24 * 60 = 1440
         val diffInMinutes = (currentTime - lastUpdated) / 1000 / 60
         return if (diffInMinutes.toInt() < cacheTimeout) {
             InitializeAction.SKIP_INITIAL_REFRESH

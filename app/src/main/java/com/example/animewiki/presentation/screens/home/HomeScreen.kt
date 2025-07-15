@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.animewiki.navigation.Screens
 import com.example.animewiki.presentation.common.ListContent
 
 @Composable
@@ -20,7 +21,9 @@ fun HomeScreen(
     val heroes = homeViewModel.getAllHeroes.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
-            HomeTopBar(onSearchClicked = {})
+            HomeTopBar(onSearchClicked = {
+                navController.navigate(Screens.Search)
+            })
         },
         content = { paddingValues ->
             ListContent(

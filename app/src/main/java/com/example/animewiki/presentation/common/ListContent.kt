@@ -92,8 +92,13 @@ fun handlePagingResult(
                 false
             }
             error!=null -> {
-                EmptyScreen(error)
+                EmptyScreen(error,heroes)
                 false
+            }
+            heroes.itemCount < 1 -> {
+                //When we have no heroes to display in the search screen or just entered search screen
+                EmptyScreen()
+                true
             }
             else -> {
                 true
