@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.animewiki.data.local.AnimeDatabase
+import com.example.animewiki.data.repository.LocalDataSourceImpl
+import com.example.animewiki.domain.repository.LocalDataSource
 import com.example.animewiki.util.Constants.ANIME_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -26,5 +28,13 @@ object DatabaseModule {
             klass = AnimeDatabase::class.java,
             name = ANIME_DATABASE
         ).build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDatabase(
+        animeDatabase: AnimeDatabase
+    ): LocalDataSource {
+        return LocalDataSourceImpl(animeDatabase = animeDatabase)
     }
 }

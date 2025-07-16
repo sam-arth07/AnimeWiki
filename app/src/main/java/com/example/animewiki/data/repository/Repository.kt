@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import androidx.room.Query
 import com.example.animewiki.domain.model.Hero
 import com.example.animewiki.domain.repository.DataStoreOperations
+import com.example.animewiki.domain.repository.LocalDataSource
 import com.example.animewiki.domain.repository.RemoteDataSource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -17,8 +18,13 @@ import javax.inject.Inject
 
 class Repository @Inject constructor(
     private val dataStore: DataStoreOperations,
-    private val remote: RemoteDataSource
+    private val remote: RemoteDataSource,
+    private val local: LocalDataSource
 ) {
+
+    suspend fun getSelectedHero(heroId: Int) : Hero {
+        return local.getSelectedHero(heroId)
+    }
 
     fun getAllHeroes(): Flow<PagingData<Hero>> {
         return remote.getAllHeroes()

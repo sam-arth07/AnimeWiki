@@ -50,41 +50,29 @@ fun SplashScreen(
 
 @Composable
 fun Splash(degrees: Float) {
-    if (isSystemInDarkTheme()) {
-        Box(
-            modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Color.Black, Color.Black.copy(alpha = 0.85f)
-                        )
-                    )
+    val modifier = if (isSystemInDarkTheme()) Modifier
+        .background(
+            brush = Brush.verticalGradient(
+                listOf(
+                    Color.Black, Color.Black.copy(alpha = 0.85f)
                 )
-                .fillMaxSize(), contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier.rotate(degrees = degrees),
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = stringResource(R.string.app_logo)
             )
-        }
-    } else {
-        Box(
-            modifier = Modifier
-                .background(
-                    brush = Brush.verticalGradient(
-                        listOf(
-                            Purple700, Purple500
-                        )
-                    )
+        ) else Modifier
+        .background(
+            brush = Brush.verticalGradient(
+                listOf(
+                    Purple700, Purple500
                 )
-                .fillMaxSize(), contentAlignment = Alignment.Center
-        ) {
-            Image(
-                modifier = Modifier.rotate(degrees = degrees),
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = stringResource(R.string.app_logo)
             )
-        }
+        )
+    Box(
+        modifier = modifier
+            .fillMaxSize(), contentAlignment = Alignment.Center
+    ) {
+        Image(
+            modifier = Modifier.rotate(degrees = degrees),
+            painter = painterResource(id = R.drawable.logo),
+            contentDescription = stringResource(R.string.app_logo)
+        )
     }
 }

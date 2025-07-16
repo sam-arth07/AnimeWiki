@@ -11,4 +11,5 @@ object Constants {
 
     const val BASE_URL = "http://10.0.2.2:8080"
     const val HEROES_PER_PAGE = 3
+    const val MIN_BACKGROUND_IMAGE_FRACTION = 0.4f
 }

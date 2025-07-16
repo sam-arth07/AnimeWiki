@@ -37,6 +37,8 @@ import com.example.animewiki.ui.theme.topAppBarBackgroundColor
 import com.example.animewiki.util.TOP_APP_BAR_HEIGHT
 import com.example.animewiki.R
 import com.example.animewiki.ui.theme.topAppBarContentColor
+import com.example.animewiki.util.LARGE_PADDING
+import com.example.animewiki.util.SMALL_PADDING
 
 @Composable
 fun SearchTopBar(
@@ -62,7 +64,9 @@ fun SearchWidget(
 ) {
     Surface(
         modifier = Modifier
-            .padding(top = WindowInsets.safeDrawing.asPaddingValues().calculateTopPadding())
+            .padding(top = WindowInsets.safeDrawing.asPaddingValues().calculateTopPadding(),
+                bottom = LARGE_PADDING
+            )
             .fillMaxWidth()
             .height(TOP_APP_BAR_HEIGHT),
         //add elevation

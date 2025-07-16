@@ -1,18 +1,9 @@
 package com.example.animewiki.presentation.common
 
 import android.content.res.Configuration
-import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -23,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -33,13 +24,17 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import coil3.compose.rememberAsyncImagePainter
+import coil3.compose.AsyncImage
+import coil3.request.ImageRequest
+import coil3.request.error
+import coil3.request.placeholder
 import com.example.animewiki.R
 import com.example.animewiki.domain.model.Hero
 import com.example.animewiki.navigation.Screens
 import com.example.animewiki.presentation.components.RatingWidget
 import com.example.animewiki.presentation.components.ShimmerEffect
 import com.example.animewiki.ui.theme.topAppBarContentColor
+import com.example.animewiki.ui.theme.welcomeScreenBackgroundColor
 import com.example.animewiki.util.Constants.BASE_URL
 import com.example.animewiki.util.HERO_ITEM_HEIGHT
 import com.example.animewiki.util.LARGE_PADDING
@@ -53,7 +48,7 @@ fun ListContent(
     modifier: Modifier,
 ) {
     val result = handlePagingResult(heroes)
-    if(result){
+    if (result) {
         LazyColumn(
             modifier = modifier,
             contentPadding = PaddingValues(all = SMALL_PADDING),
@@ -71,14 +66,14 @@ fun ListContent(
     }
 }
 
+/**
+ * Returns false if data is loading and true if data is ready to be displayed to the users.
+ */
+
 @Composable
 fun handlePagingResult(
     heroes: LazyPagingItems<Hero>
-) : Boolean {
-    /**
-     * Returns false if data is loading and true if data is ready to be displayed to the users.
-     */
-
+): Boolean {
     heroes.apply {
         val error = when {
             loadState.refresh is LoadState.Error -> loadState.refresh as LoadState.Error
@@ -91,15 +86,18 @@ fun handlePagingResult(
                 ShimmerEffect()
                 false
             }
-            error!=null -> {
-                EmptyScreen(error,heroes)
+
+            error != null -> {
+                EmptyScreen(error, heroes)
                 false
             }
+
             heroes.itemCount < 1 -> {
                 //When we have no heroes to display in the search screen or just entered search screen
                 EmptyScreen()
                 true
             }
+
             else -> {
                 true
             }
@@ -112,13 +110,6 @@ fun HeroItem(
     navController: NavHostController,
     hero: Hero,
 ) {
-
-    val painter = rememberAsyncImagePainter(
-        model = "$BASE_URL${hero.image}",
-        placeholder = painterResource(R.drawable.placeholder),
-        error = painterResource(R.drawable.placeholder)
-    )
-
     Box(
         modifier = Modifier
             .height(HERO_ITEM_HEIGHT)
@@ -131,9 +122,13 @@ fun HeroItem(
                 bottomStart = LARGE_PADDING, bottomEnd = LARGE_PADDING
             )
         ) {
-            Image(
+            AsyncImage(
                 modifier = Modifier.fillMaxSize(),
-                painter = painter,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data("$BASE_URL${hero.image}")
+                    .placeholder(R.drawable.placeholder)
+                    .error(R.drawable.placeholder)
+                    .build(),
                 contentDescription = stringResource(R.string.hero_image),
                 contentScale = ContentScale.Crop
             )

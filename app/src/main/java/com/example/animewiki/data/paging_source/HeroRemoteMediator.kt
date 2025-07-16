@@ -21,7 +21,7 @@ import java.util.Locale
  */
 
 @OptIn(ExperimentalPagingApi::class)
-class HeroRemoteMediator @Inject constructor(
+class HeroRemoteMediator(
     private val animeApi: AnimeApi, private val animeDatabase: AnimeDatabase
 ) : RemoteMediator<Int, Hero>() {
 

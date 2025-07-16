@@ -6,7 +6,7 @@ import com.example.animewiki.data.remote.AnimeApi
 import com.example.animewiki.domain.model.Hero
 import jakarta.inject.Inject
 
-class SearchHeroesSource @Inject constructor(
+class SearchHeroesSource (
     private val animeApi: AnimeApi,
     private val query: String
 ) : PagingSource<Int, Hero>() {

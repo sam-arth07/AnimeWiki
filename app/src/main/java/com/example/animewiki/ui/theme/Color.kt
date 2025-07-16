@@ -33,7 +33,7 @@ val DarkBrush = Brush.verticalGradient(
 
 val LightBrush = Brush.verticalGradient(
     listOf(
-        Color.White,
+        Purple80,
         Color.White
     )
 )

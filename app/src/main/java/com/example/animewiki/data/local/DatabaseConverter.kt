@@ -5,12 +5,12 @@ import androidx.room.TypeConverter
 class DatabaseConverter {
 
     private val separator = ","
-
+    /**
+     * Function to convert a List<String> to a simple String
+     * */
     @TypeConverter
     fun convertListToString(list: List<String>): String {
-        /* *
-        * Function to convert a List<String> to a simple String
-        * */
+
         if (list.isEmpty()) {
             return ""
         }
@@ -22,12 +22,11 @@ class DatabaseConverter {
         return list.joinToString(separator = separator)
     }
 
+    /**
+     * Function to convert back the stored string back to a List<String>
+     * */
     @TypeConverter
     fun convertStringToList(str: String): List<String> {
-        /* *
-        * Function to convert back the stored string back to a List<String>
-        * */
-
         if (str.isEmpty()) {
             return emptyList()
         }

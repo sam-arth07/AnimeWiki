@@ -1,7 +1,10 @@
 package com.example.animewiki.presentation.common
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -16,6 +19,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,8 +33,12 @@ import com.example.animewiki.R
 import com.example.animewiki.domain.model.Hero
 import com.example.animewiki.ui.theme.DarkGray
 import com.example.animewiki.ui.theme.LightGray
+import com.example.animewiki.ui.theme.Purple80
+import com.example.animewiki.ui.theme.topAppBarBackgroundColor
+import com.example.animewiki.ui.theme.welcomeScreenBackgroundColor
 import com.example.animewiki.util.NETWORK_ERROR_ICON_HEIGHT
 import com.example.animewiki.util.SMALL_PADDING
+import kotlinx.coroutines.launch
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
@@ -62,10 +73,11 @@ fun EmptyScreen(
     LaunchedEffect(key1 = true) {
         startAnimation = true
     }
-    EmptyContent(alphaAnim, icon, message, heroes, error)
+    EmptyContent(alphaAnim, icon, message, heroes)
 
 }
 
+@SuppressLint("ContextCastToActivity")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun EmptyContent(
@@ -73,21 +85,25 @@ private fun EmptyContent(
     icon: Int,
     message: String,
     heroes: LazyPagingItems<Hero>? = null,
-    error: LoadState.Error? = null,
 ) {
-
+    val scope = rememberCoroutineScope()
+    val refreshState = rememberPullToRefreshState()
     var isRefreshing by remember {
         mutableStateOf(false)
     }
     PullToRefreshBox(
-        modifier = Modifier.padding(top = WindowInsets.safeDrawing.asPaddingValues().calculateTopPadding()),
+        modifier = Modifier
+            .padding(top = WindowInsets.safeDrawing.asPaddingValues().calculateTopPadding()),
         isRefreshing = isRefreshing,
         onRefresh = {
             isRefreshing = true
             heroes?.refresh()
             isRefreshing = false
+            scope.launch {
+                refreshState.animateToHidden()
+            }
         },
-        state = rememberPullToRefreshState(),
+        state = refreshState,
     ) {
         Column(
             modifier = Modifier

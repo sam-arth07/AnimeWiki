@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about_title">About</string>
+    <string name="family">Family</string>
+    <string name="abilities">Abilities</string>
+    <string name="nature_types">Nature Types</string>
+</resources>
