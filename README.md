@@ -1,0 +1,182 @@
+# 🌟 AnimeWiki
+
+<div align="center">
+  <img src="app/src/main/ic_launcher-playstore.png" alt="AnimeWiki Logo" width="180"/>
+  <h3>Your Ultimate Anime Discovery Companion</h3>
+</div>
+
+AnimeWiki is an elegant, feature-rich Android application that transforms the anime exploration experience. Achieved an immersive and intuitive interface by implementing modern Android architecture patterns and reactive programming paradigms, resulting in a seamless, responsive, and visually captivating application.
+
+---
+
+## ✨ Key Features
+
+- **Comprehensive Anime Database**: Explore thousands of anime titles with detailed information
+- **Dynamic UI**: Experience smooth animations and theme-adaptive interfaces with Material 3 design
+- **Smart Search**: Find anime quickly with powerful search functionality
+- **Offline Support**: Browse your favorite anime even without an internet connection
+- **Dynamic Theming**: Enjoy adaptive color schemes extracted from anime cover images
+
+---
+
+## 🌐 Live Server
+
+The application is powered by a dedicated backend server:
+[AnimeWiki Server on Render](https://animeserver-cm3n.onrender.com)
+
+---
+
+## 🏗️ Architecture Overview
+
+AnimeWiki is built with a **Clean Architecture** approach following the **MVVM** pattern:
+
+<div align="center">
+  <img src="https://developer.android.com/static/topic/libraries/architecture/images/final-architecture.png" alt="Architecture Diagram" width="600"/>
+</div>
+
+### Layer Separation
+
+- **📊 Data Layer**: 
+  - Handles remote API communication, local database storage, and data modeling
+  - Implements repository pattern for single source of truth
+  - Uses Room for persistent storage and Retrofit for network calls
+
+- **💼 Domain Layer**: 
+  - Contains business logic and use cases
+  - Defines repository interfaces
+  - Pure Kotlin with no Android dependencies
+
+- **🖼️ Presentation Layer**: 
+  - Contains screens, ViewModels, and UI state management
+  - Utilizes Jetpack Compose for declarative UI
+  - Implements unidirectional data flow with Kotlin Flows
+
+- **🎨 UI Layer**: 
+  - Contains theme definitions and color systems
+  - Implements Material 3 design principles
+
+- **💉 DI Layer**: 
+  - Provides dependency injection setup with Hilt
+  - Ensures proper separation of concerns
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies | Purpose |
+|----------|-------------|---------|
+| **Core** | ![Kotlin](https://img.shields.io/badge/Kotlin-7F52FF.svg?style=flat&logo=kotlin&logoColor=white) | Modern, concise language with coroutines for asynchronous programming |
+| **UI** | ![Jetpack Compose](https://img.shields.io/badge/Jetpack%20Compose-4285F4.svg?style=flat&logo=jetpack-compose&logoColor=white) ![Material 3](https://img.shields.io/badge/Material%203-757575.svg?style=flat&logo=material-design&logoColor=white) | Declarative UI toolkit with modern design principles |
+| **Architecture** | ![MVVM](https://img.shields.io/badge/MVVM-0095D5.svg?style=flat) ![Clean Architecture](https://img.shields.io/badge/Clean%20Architecture-0095D5.svg?style=flat) | Separation of concerns and testable code structure |
+| **Dependency Injection** | ![Hilt](https://img.shields.io/badge/Hilt-2196F3.svg?style=flat) | Simplified DI implementation built on Dagger |
+| **Networking** | ![Retrofit](https://img.shields.io/badge/Retrofit-3E4348.svg?style=flat) ![OkHttp](https://img.shields.io/badge/OkHttp-3E4348.svg?style=flat) ![KotlinX Serialization](https://img.shields.io/badge/KotlinX%20Serialization-7F52FF.svg?style=flat) | Type-safe HTTP client with efficient serialization |
+| **Local Storage** | ![Room](https://img.shields.io/badge/Room-3DDC84.svg?style=flat) ![DataStore](https://img.shields.io/badge/DataStore-3DDC84.svg?style=flat) | Database and preferences management |
+| **Navigation** | ![Jetpack Navigation](https://img.shields.io/badge/Navigation%20Compose-4285F4.svg?style=flat) | Type-safe navigation between screens |
+| **Image Loading** | ![Coil](https://img.shields.io/badge/Coil-E91E63.svg?style=flat) | Kotlin-first image loading library |
+| **Pagination** | ![Paging 3](https://img.shields.io/badge/Paging%203-3DDC84.svg?style=flat) | Efficient loading of large data sets |
+| **Dynamic Theming** | ![Palette API](https://img.shields.io/badge/Palette%20API-4285F4.svg?style=flat) | Extract vibrant colors from images |
+| **Backend** | ![Render](https://img.shields.io/badge/Render-46E3B7.svg?style=flat&logo=render&logoColor=white) | Cloud hosting platform for API |
+
+---
+
+## 📱 Screenshots
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center"><b>Home Screen</b></td>
+      <td align="center"><b>Anime Details</b></td>
+      <td align="center"><b>Search</b></td>
+      <td align="center"><b>Dark Mode</b></td>
+    </tr>
+    <tr>
+      <td><img src="screenshots/home.png" width="200"/></td>
+      <td><img src="screenshots/details.png" width="200"/></td>
+      <td><img src="screenshots/search.png" width="200"/></td>
+      <td><img src="screenshots/dark.png" width="200"/></td>
+    </tr>
+  </table>
+</div>
+
+*Note: Create a `screenshots` directory and add your actual app screenshots.*
+
+---
+
+## 📂 Project Structure
+
+```
+app/src/main/java/com/example/animewiki/
+├── data/                # Data sources, repositories, models
+│   ├── local/           # Room database, entities, DAOs
+│   ├── remote/          # Retrofit services, DTOs, API responses
+│   └── repositories/    # Repository implementations
+├── di/                  # Dependency injection modules
+├── domain/              # Business logic, use cases, domain models
+│   ├── models/          # Domain entities
+│   ├── repositories/    # Repository interfaces
+│   └── usecases/        # Application use cases
+├── navigation/          # Navigation graphs and route definitions
+├── presentation/        # Screens, ViewModels
+│   ├── common/          # Shared UI components
+│   ├── details/         # Anime details screen and ViewModel
+│   ├── home/            # Home screen and ViewModel
+│   └── search/          # Search screen and ViewModel
+├── ui/                  # Theme and color definitions
+│   ├── theme/           # Material theme setup
+│   └── color/           # Color palettes
+├── util/                # Extension functions and helper classes
+├── MainActivity.kt      # Main activity hosting the Compose UI
+└── MyApplication.kt     # Application class for Hilt setup
+```
+
+---
+
+## 🚀 Implementation Highlights
+
+Achieved an exceptional anime discovery experience by implementing:
+
+- **Reactive Data Flow**: Utilized Kotlin Flows throughout the app for reactive UI updates and seamless user experience
+- **Efficient Pagination**: Implemented Paging 3 library to handle large datasets with minimal memory footprint
+- **Dynamic Theming**: Applied Palette API to extract colors from anime images for immersive, content-aware UI
+- **Clean Architecture**: Structured the app with proper separation of concerns for maintainability and testability
+- **Offline-First Approach**: Designed with Room database as single source of truth, enabling offline browsing
+- **Elegant UI**: Created fluid animations and transitions with Jetpack Compose for a delightful user experience
+
+---
+
+## 📋 Requirements
+
+- Android Studio Iguana or newer
+- Minimum SDK: 24 (Android 7.0 Nougat)
+- Target SDK: 35 (Android 15)
+- Kotlin 2.0
+
+---
+
+## 🚀 Getting Started
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/AnimeWiki.git
+   ```
+
+2. Open the project in Android Studio
+
+3. Sync Gradle and build the project
+
+4. Run on your device or emulator
+
+---
+
+## 📊 Future Enhancements
+
+- User authentication and personalized recommendations
+- Offline-first approach with improved caching
+- Advanced filtering and sorting options
+- Social features for sharing and discussing anime
+- Integration with external tracking services
+
+---
+<div align="center">
+  <p>Built with ❤️ using modern Android development practices</p>
+</div>
