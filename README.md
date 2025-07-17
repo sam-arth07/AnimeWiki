@@ -81,21 +81,41 @@ AnimeWiki is built with a **Clean Architecture** approach following the **MVVM**
 
 ## 📱 Screenshots
 
+### Splash Screen
 <div align="center">
-  <table>
-    <tr>
-      <td align="center"><b>Home Screen</b></td>
-      <td align="center"><b>Anime Details</b></td>
-      <td align="center"><b>Search</b></td>
-      <td align="center"><b>Dark Mode</b></td>
-    </tr>
-    <tr>
-      <td><img src="screenshots/home.png" width="200"/></td>
-      <td><img src="screenshots/details.png" width="200"/></td>
-      <td><img src="screenshots/search.png" width="200"/></td>
-      <td><img src="screenshots/dark.png" width="200"/></td>
-    </tr>
-  </table>
+  <img src="https://github.com/user-attachments/assets/b94850ab-8e48-416e-bdff-cb68fb398cd1" width="240"/>
+  <img src="https://github.com/user-attachments/assets/57bd6999-523c-4163-96d3-8208a58203f7" width="240"/>
+</div>
+
+### Welcome Screen
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/edb59d9f-2c00-4661-8f75-4a6d1b32d751" width="240"/>
+  <img src="https://github.com/user-attachments/assets/2e212dd5-2ab9-4e29-b529-7026a071c76f" width="240"/>
+  <img src="https://github.com/user-attachments/assets/453613a5-bcef-4d95-b30c-bc1111dcacc4" width="240"/>
+  <img src="https://github.com/user-attachments/assets/853032f1-2319-4510-9480-6096ae5b5246" width="240"/>
+  <img src="https://github.com/user-attachments/assets/5ca0a78f-530c-4872-b1c3-6f5eab88e8c1" width="240"/>
+  <img src="https://github.com/user-attachments/assets/7e7644be-e55c-4ec3-92fc-3c8fa5dfa51c" width="240"/>
+</div>
+
+### Home Screen
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/9cd8fbbb-7d5c-4651-80cf-fdd0c1344b36" width="240"/>
+  <img src="https://github.com/user-attachments/assets/9f485fb0-c00e-4bef-a99a-f7d4a8493845" width="240"/>
+</div>
+
+### Anime Details
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/c3500448-a7a1-4f42-b2e2-6f38aff1cb37" width="240"/>
+  <img src="https://github.com/user-attachments/assets/4b073726-b5e8-457c-abea-c35002de2872" width="240"/>
+  <img src="https://github.com/user-attachments/assets/c1aa0ab4-0bd9-448f-bd3c-06ba96b33887" width="240"/>
+  <img src="https://github.com/user-attachments/assets/20e14390-b3ea-4ba8-98f4-0aae05f2abdb" width="240"/>
+</div>
+
+### Search
+<div align="center">
+  <img src="https://github.com/user-attachments/assets/37b5888c-c89d-4a6d-8e10-433beac0c094" width="240"/>
+  <img src="https://github.com/user-attachments/assets/2e825ec4-ebdf-4292-92b0-e52412082a7b" width="240"/>
+  <img src="https://github.com/user-attachments/assets/d9dc53f1-5e92-4067-9fbf-9fa5d5034a14" width="240"/>
 </div>
 
 *Note: Create a `screenshots` directory and add your actual app screenshots.*

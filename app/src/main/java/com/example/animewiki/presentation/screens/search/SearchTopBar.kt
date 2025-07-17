@@ -64,9 +64,7 @@ fun SearchWidget(
 ) {
     Surface(
         modifier = Modifier
-            .padding(top = WindowInsets.safeDrawing.asPaddingValues().calculateTopPadding(),
-                bottom = LARGE_PADDING
-            )
+            .padding(top = WindowInsets.safeDrawing.asPaddingValues().calculateTopPadding())
             .fillMaxWidth()
             .height(TOP_APP_BAR_HEIGHT),
         //add elevation
